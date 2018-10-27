@@ -1,0 +1,25 @@
+	def clean_fees_paid(self):
+		fees_paid = self.cleaned_data.get('fees_paid')
+		if fees_paid>40000:
+			raise forms.ValidationError('Fee limit exceeds')
+		elif fees_paid<0:
+			raise forms.ValidationError('Fee can not be negative')
+		return fees_paid
+
+	def clean_aadhar(self):
+		aadhar = self.cleaned_data.get('aadhar')
+		if len(aadhar)>0 and len(aadhar)!=12:
+			raise forms.ValidationError('Incorrect aadhar number')
+		return aadhar
+
+	def clean_name(self):
+		name = self.cleaned_data.get('name')
+		if len(name)>50:
+			raise forms.ValidationError('Maximum length of name is 50')
+		return name 
+
+	def clean_rollno(self):
+		rollno = self.cleaned_data.get('rollno')
+		if len(rollno)>0 and len(rollno)!=10:
+			raise forms.ValidationError('Incorrect roll no.')
+		return rollno 
